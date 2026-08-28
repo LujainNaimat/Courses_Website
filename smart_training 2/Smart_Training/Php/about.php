@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+<meta name="author" content="Lujain">
+<meta name="keywords" content="Smart Training, online learning, professional training, education, courses, skill development, career growth">
+    <title>About us</title>
+
+<link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=dehaze" />
+
+</head>
+
+<body>
+    <section id="navigation">
+        <?php include "navbar.php" ?>
+    </section>
+    <section id="about-us">
+        <div class="about-container">
+
+            <h1>About Us</h1>
+            <p>
+                Welcome to our Smart Training platform. We provide high-quality courses
+                designed to help students improve their skills in technology, business,
+                and personal development.
+            </p>
+
+            <p>
+                Our mission is to make learning simple practical, and accessible for everyone.
+                our main focus on real-world skills that help you grow in your career.
+            </p>
+            <p>
+                Smart Training was established in 2020 with the goal of providing high-quality,
+                practical education for students who want to build real skills in technology and career development.
+            </p>
+
+            <p>
+                We offer a variety of professional courses including Web Development, Data Analysis,
+                Cybersecurity, Cloud Computing, and Personal Career Mentoring. Each course is designed
+                to be practical, easy to follow, and focused on real-world applications.
+            </p>
+            <div class="course-btn-container">
+                <a href="courses.php" class="course-btn">View Courses</a>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
