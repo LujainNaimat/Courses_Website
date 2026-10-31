@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleregister.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+</head>
+
+<body>
+    <section id="sign_up">
+        <div class="register_container">
+            <legend>Sign Up</legend>
+
+            <form id="signup_form">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" required>
+                <br><br>
+
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" required>
+                <br><br>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <br><br>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+                <br><br>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+                <br><br>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+                <br><br>
+
+                <label for="DOB">Date of Birth</label>
+                <input type="date" id="DOB" name="DOB" required>
+                <br><br>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <br><br>
+
+                <button type="submit" name="sign_up">Sign Up</button>
+            </form>
+        </div>
+        <p><a href="signin.html">Already have an account? Sign in</a></p>
+    </section>
+
+    <script>
+        document.getElementById("signup_form").onsubmit = function (e) {
+            e.preventDefault();
+
+            var users = getTable("users");
+            var email = document.getElementById("email").value;
+
+            // only insert if there arent any emails like the entered email
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email == email) {
+                    alert("Error:An account was created with this email already");
+                    return;
+                }
+            }
+
+            users.push({
+                id: nextId(users),
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                email: email,
+                password: document.getElementById("password").value,
+                phone: document.getElementById("phone").value,
+                country: document.getElementById("country").value,
+                city: document.getElementById("city").value,
+                DOB: document.getElementById("DOB").value,
+                gender: document.getElementById("gender").value,
+                role: "user"
+            });
+            saveTable("users", users);
+
+            alert("Account created! You can sign in now.");
+            window.location.href = "signin.html";
+        };
+    </script>
+</body>
+
+</html>

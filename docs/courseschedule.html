@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Schedule</title>
+    <meta name="author" content="Lujain">
+    <meta name="keywords" content="course schedule, training timetable, class schedule, learning calendar, Smart Training">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+
+    <section id="schedule">
+        <div id="schedule-container"></div>
+    </section>
+
+    <script>
+        renderNavbar();
+
+        var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var schedules = getTable("course_schedule");
+
+        // SELECT DISTINCT stime, etime ... ORDER BY stime
+        var times = [];
+        for (var i = 0; i < schedules.length; i++) {
+            var label = schedules[i].stime + " - " + schedules[i].etime;
+            var found = false;
+            for (var t = 0; t < times.length; t++) {
+                if (times[t].label == label) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                times.push({ stime: schedules[i].stime, etime: schedules[i].etime, label: label });
+            }
+        }
+        times.sort(function (a, b) {
+            return a.stime.localeCompare(b.stime);
+        });
+
+        var html = "<div class='table-scroll'><table><tr><td><b>Time/Day</b></td>";
+        for (var d = 0; d < days.length; d++) {
+            html += "<th>" + days[d] + "</th>";
+        }
+        html += "</tr>";
+
+        for (var t = 0; t < times.length; t++) {
+            html += "<tr><td><b>" + times[t].label + "</b></td>";
+
+            for (var d = 0; d < days.length; d++) {
+                var coursename = "";
+                for (var s = 0; s < schedules.length; s++) {
+                    var schedule = schedules[s];
+                    if (schedule.stime == times[t].stime && schedule.etime == times[t].etime && schedule.day == days[d]) {
+                        coursename = schedule.name;
+                        break;
+                    }
+                }
+                html += "<td>" + esc(coursename) + "</td>";
+            }
+            html += "</tr>";
+        }
+        html += "</table></div>";
+
+        document.getElementById("schedule-container").innerHTML = html;
+    </script>
+</body>
+
+</html>

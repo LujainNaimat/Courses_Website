@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <meta name="author" content="Lujain">
+    <meta name="description" content="Review your selected courses and packages before completing your purchase">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+
+    <div id="my_cart">
+        <h2>My Cart</h2>
+        <div id="orders"></div>
+        <div id="total"></div>
+    </div>
+
+    <script>
+        // only signed in users have a cart
+        if (!getSession().email) {
+            window.location.href = "signin.html";
+        }
+
+        renderNavbar();
+
+        function removeOrder(id) {
+            deleteById("orders", id);
+            showCart();
+        }
+
+        function showCart() {
+            var total = renderOrders("orders", "Your cart is empty");
+
+            if (total > 0) {
+                document.getElementById("total").innerHTML =
+                    "<div class='cart_total'>" +
+                    "<h2>Total Price</h2>" + total + " JD" +
+                    "<button class='payment_btn' type='button' onclick='paynow()'>Pay now</button>" +
+                    "</div>";
+            } else {
+                document.getElementById("total").innerHTML = "";
+            }
+        }
+
+        showCart();
+    </script>
+</body>
+
+</html>

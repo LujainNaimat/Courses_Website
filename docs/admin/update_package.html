@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Form</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script src="../js/db.js"></script>
+    <script src="../js/admin.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+    <form id="package_form">
+        <fieldset>
+            <legend>Package Form</legend>
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="enter name" required>
+            <label>Details:</label>
+            <input type="text" name="details" placeholder="enter details" required>
+            <label>price</label>
+            <input type="number" name="price" placeholder="enter price" required>
+
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+
+    <script>
+        renderAdminNavbar();
+
+        var id = getParam("id");
+        var row = findById(getTable("packages"), id);
+        if (row) {
+            fillForm(row);
+        } else {
+            window.location.href = "package.html";
+        }
+
+        document.getElementById("package_form").onsubmit = function (e) {
+            e.preventDefault();
+
+            var data = readForm(["name", "details", "price"]);
+            data.price = Number(data.price);
+            updateRow("packages", id, data);
+            window.location.href = "package.html";
+        };
+    </script>
+</body>
+
+</html>

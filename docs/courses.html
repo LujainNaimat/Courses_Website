@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <meta name="author" content="Lujain">
+    <meta name="keywords" content="Smart Training, online learning, professional training, education, courses, skill development, career growth">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+
+    <section id="courses">
+        <div id="courses-container"></div>
+    </section>
+
+    <script>
+        renderNavbar();
+
+        function enroll(courseId) {
+            var session = getSession();
+            var course = findById(getTable("services"), courseId);
+            var orders = getTable("orders");
+
+            // INSERT INTO orders (course_name, course_price, user_email)
+            orders.push({
+                id: nextId(orders),
+                course_name: course.name,
+                course_price: course.price,
+                package_name: null,
+                package_price: null,
+                user_email: session.email
+            });
+            saveTable("orders", orders);
+            showCourses();
+        }
+
+        function cancelCourse(orderId) {
+            deleteById("orders", orderId);
+            showCourses();
+        }
+
+        function showCourses() {
+            var session = getSession();
+            var allcourses = getTable("services");
+            var orders = getTable("orders");
+            var html = "";
+
+            for (var i = 0; i < allcourses.length; i++) {
+                var course = allcourses[i];
+
+                html += "<div class='card'>" +
+                    "<div class='card-img'><img src='" + esc(course.image) + "' alt='course-img'></div>" +
+                    "<h2>" + esc(course.name) + "</h2>" +
+                    "<p>" + esc(course.details) + "</p>" +
+                    "<h2>" + esc(course.price) + " JD</h2>" +
+                    "<form onsubmit='return false;'>";
+
+                if (session.email) {
+                    // check if this user already enrolled in this course
+                    var order = null;
+                    for (var j = 0; j < orders.length; j++) {
+                        if (orders[j].course_name == course.name && orders[j].user_email == session.email) {
+                            order = orders[j];
+                        }
+                    }
+
+                    if (order) {
+                        html += "<a class='delete_link' href='#' title='Remove from cart' onclick='cancelCourse(" + order.id + "); return false;'>" +
+                            "<span class='material-symbols-outlined'>cancel</span></a>";
+                    } else {
+                        html += "<button class='buybtn' type='button' onclick='enroll(" + course.id + ")'> enroll " +
+                            "<span class='material-symbols-outlined'>shopping_cart</span></button>";
+                    }
+                } else {
+                    // shows a message for guests
+                    html += "<a href='signin.html' class='buybtn'>Sign in to Enroll</a>";
+                }
+
+                html += "</form></div>";
+            }
+
+            // the floating cart button
+            if (session.email) {
+                for (var k = 0; k < orders.length; k++) {
+                    if (orders[k].user_email == session.email) {
+                        html += "<a href='cart.html' class='cart_btn'><span class='material-symbols-outlined'>shopping_cart_checkout</span></a>";
+                        break;
+                    }
+                }
+            }
+
+            document.getElementById("courses-container").innerHTML = html;
+        }
+
+        showCourses();
+    </script>
+</body>
+
+</html>

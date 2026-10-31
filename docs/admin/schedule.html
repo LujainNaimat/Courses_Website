@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script src="../js/db.js"></script>
+    <script src="../js/admin.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+    <button type="button" class="btn btn-primary btn-lg"><a href="add_schedule.html">Add Time slot</a></button>
+
+    <section class="schedule">
+        <div class="table-scroll">
+        <table>
+            <thead>
+            <tr>
+                <th>course_name</th>
+                <th>start-time</th>
+                <th>end-time</th>
+                <th>Day</th>
+                <th id="action_col">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+        </table>
+        </div>
+    </section>
+
+    <script>
+        renderAdminNavbar();
+
+        var rows = getTable("course_schedule");
+
+        // ORDER BY day (Monday first), then start time
+        var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        rows.sort(function (a, b) {
+            if (a.day != b.day) {
+                return days.indexOf(a.day) - days.indexOf(b.day);
+            }
+            return a.stime.localeCompare(b.stime);
+        });
+
+        renderAdminTable("course_schedule", rows, [{ key: "name" }, { key: "stime" }, { key: "etime" }, { key: "day" }], "update_schedule.html");
+    </script>
+</body>
+
+</html>

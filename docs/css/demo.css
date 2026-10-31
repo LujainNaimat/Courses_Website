@@ -1,0 +1,72 @@
+/* extra styles only used by the GitHub Pages demo */
+
+.demo-note {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2000;
+
+  max-width: calc(100% - 24px);
+  padding: 8px 14px;
+
+  background: rgba(15, 23, 42, 0.88);
+  color: #fff;
+  border-radius: 8px;
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.demo-note a {
+  color: #93c5fd;
+  font-weight: bold;
+}
+
+.demo-accounts {
+  margin-top: 15px;
+  padding: 12px;
+
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1e3a8a;
+}
+
+.demo-accounts button {
+  width: auto;
+  margin: 4px 6px 0 0;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* buttons in the courses page are real buttons here, keep them looking like links */
+.card .buybtn,
+.package_row .buybtn {
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.instructor-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-img img {
+  object-fit: cover;
+}
+
+.cart_table .delete_btn {
+  cursor: pointer;
+}
+
+/* admin tables can be wide on phones */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}

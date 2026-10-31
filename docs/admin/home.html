@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script src="../js/db.js"></script>
+    <script src="../js/admin.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+    <section class="dashboard-header">
+        <h2 class="greeting">Hello, <span id="name"></span></h2>
+        <h1 class="title">Welcome to Admin Dashboard !</h1>
+        <p class="subtitle">Manage courses, schedules, packages, and instructors efficiently.</p>
+    </section>
+
+    <section class="dashboard-links">
+        <a href="course.html" class="dashboard-card">Courses</a>
+        <a href="schedule.html" class="dashboard-card">Schedule</a>
+        <a href="package.html" class="dashboard-card">Packages</a>
+        <a href="instructor.html" class="dashboard-card">Instructors</a>
+    </section>
+
+    <script>
+        renderAdminNavbar();
+        document.getElementById("name").textContent = getSession().student;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Form</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script src="../js/db.js"></script>
+    <script src="../js/admin.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+    <form id="schedule_form">
+        <fieldset>
+            <legend>Schedule Form</legend>
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="enter name" required>
+            <label>start time:</label>
+            <input type="time" name="stime" required>
+            <label>end time:</label>
+            <input type="time" name="etime" required>
+            <label>Day :</label>
+            <select name="day" required>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+
+    <script>
+        renderAdminNavbar();
+
+        document.getElementById("schedule_form").onsubmit = function (e) {
+            e.preventDefault();
+
+            var data = readForm(["name", "stime", "etime", "day"]);
+            if (data.stime >= data.etime) {
+                alert('End time must be after start time!');
+                return;
+            }
+            insertRow("course_schedule", data);
+            window.location.href = "schedule.html";
+        };
+    </script>
+</body>
+
+</html>

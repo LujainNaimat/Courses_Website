@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages</title>
+    <meta name="author" content="Lujain">
+    <meta name="keywords" content="training packages, subscription plans, course bundles, pricing, learning packages, Smart Training">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+
+    <h1 class='page-title'>Our packages</h1>
+    <div id="packages"></div>
+
+    <script>
+        renderNavbar();
+
+        function enrollPackage(packageId) {
+            var session = getSession();
+            var pack = findById(getTable("packages"), packageId);
+            var orders = getTable("orders");
+
+            // INSERT INTO orders (package_name, package_price, user_email)
+            orders.push({
+                id: nextId(orders),
+                course_name: null,
+                course_price: null,
+                package_name: pack.name,
+                package_price: pack.price,
+                user_email: session.email
+            });
+            saveTable("orders", orders);
+            window.location.href = "cart.html";
+        }
+
+        var session = getSession();
+        var allpackages = getTable("packages");
+        var orders = getTable("orders");
+
+        // a user can only have one package
+        var hasPackage = false;
+        if (session.email) {
+            for (var j = 0; j < orders.length; j++) {
+                if (orders[j].user_email == session.email && orders[j].package_name) {
+                    hasPackage = true;
+                }
+            }
+        }
+
+        var html = "";
+        for (var i = 0; i < allpackages.length; i++) {
+            var pack = allpackages[i];
+
+            html += "<div class='package_row'>" +
+                "<h1>" + esc(pack.name) + "</h1>" +
+                "<p>" + esc(pack.details) + "</p>" +
+                "<h2>" + esc(pack.price) + " JD</h2>";
+
+            if (session.email) {
+                if (hasPackage) {
+                    html += "<a href='cart.html' class='packagecart'><span class='material-symbols-outlined'>shopping_cart</span>already enrolled in package check cart</a>";
+                } else {
+                    html += "<button class='buybtn' type='button' onclick='enrollPackage(" + pack.id + ")'> enroll " +
+                        "<span class='material-symbols-outlined'>shopping_cart</span></button>";
+                }
+            } else {
+                // shows a message for guests
+                html += "<a href='signin.html' class='buybtn'>Sign in to Enroll</a>";
+            }
+
+            html += "</div>";
+        }
+
+        document.getElementById("packages").innerHTML = html;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses</title>
+    <meta name="author" content="Lujain">
+    <meta name="keywords" content="courses, training courses, online courses, learning programs, professional development, Smart Training">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="js/db.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <section id="navigation"></section>
+
+    <div id="my_cart">
+        <h2>My Courses</h2>
+        <div id="orders"></div>
+    </div>
+
+    <script>
+        if (!getSession().email) {
+            window.location.href = "signin.html";
+        }
+
+        renderNavbar();
+
+        function removeOrder(id) {
+            deleteById("orders", id);
+            renderOrders("orders", "No courses were registered");
+        }
+
+        renderOrders("orders", "No courses were registered");
+    </script>
+</body>
+
+</html>
