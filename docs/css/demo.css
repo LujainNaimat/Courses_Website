@@ -70,3 +70,8 @@
   width: 100%;
   overflow-x: auto;
 }
+
+/* leave room so the demo note never covers the last row of a page */
+body {
+  padding-bottom: 60px;
+}
