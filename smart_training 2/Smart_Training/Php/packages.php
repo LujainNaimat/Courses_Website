@@ -87,7 +87,7 @@ AND package_name IS NOT NULL
 
                 $order_id = $row['id'];
                 echo "
-               <a href='Cart.php' class='packagecart'><span class='material-symbols-outlined'>
+               <a href='cart.php' class='packagecart'><span class='material-symbols-outlined'>
 shopping_cart
 </span>already enrolled in package check cart</a>
           ";

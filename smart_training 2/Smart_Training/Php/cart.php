@@ -62,7 +62,7 @@
 $course_price</td>
 
 
-<td><a href=delete.php?id=$id class=delete_btn><span class='material-symbols-outlined'>
+<td><a href='delete.php?id=$id&from=cart' class='delete_btn'><span class='material-symbols-outlined'>
 close
 
 </span></a>
@@ -122,7 +122,7 @@ shopping_cart
         if (isset($_SESSION['email']) && ($has_courses || $has_packages)) {
 
             $Totalsql = "SELECT 
-    SUM(course_price) + SUM(package_price) AS total_price
+    IFNULL(SUM(course_price), 0) + IFNULL(SUM(package_price), 0) AS total_price
 FROM orders
 WHERE user_email = '$email' ";
             $send_sql = mysqli_query($connect, $Totalsql);

@@ -48,7 +48,7 @@ dehaze
     <?php
     if (isset($_SESSION['student'])) {
         echo '
-        <a href="Cart.php" class="navlink" id=shopping_cart ><span class="material-symbols-outlined">
+        <a href="cart.php" class="navlink" id=shopping_cart ><span class="material-symbols-outlined">
 shopping_cart
 </span></a>
     <a href="signout.php" class="navlink" id="sign_out">sign out</a> ';

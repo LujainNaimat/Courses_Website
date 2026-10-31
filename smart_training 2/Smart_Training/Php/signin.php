@@ -56,7 +56,7 @@ if (isset($_POST['sign_in'])) {
       <input type="password" name="password" required>
       <br><br>
 
-      <button type="submit" name="sign_in">Sign Up</button>
+      <button type="submit" name="sign_in">Sign in</button>
 
     </form>
   </div>

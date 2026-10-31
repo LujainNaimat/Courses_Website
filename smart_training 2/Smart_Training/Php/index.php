@@ -27,7 +27,7 @@ include "connect.php";
 
 <body>
     <section class="hero_video">
-<video src="..//assets/video.mp4" autoplay muted loop ></video>      
+<video src="../assets/video.mp4" autoplay muted loop ></video>      
     <div class="hero_text">
         <h1>Welcome to Smart Training Institute</h1>
         <p>Your future in technology starts here.</p>
@@ -42,7 +42,7 @@ include "connect.php";
        
     <?php include "navbar.php" ?>
     </section>
-    <section="hero">
+    <section id="hero">
 
         <?php
         if(isset($_SESSION['student'])){ echo "welcome" . " " . $_SESSION['student'];}
@@ -54,7 +54,7 @@ include "connect.php";
     </section>
     <section id="why_choose_us">
     <div id="hero_img">
-    <img src="/Smart_Training/assets/teamwork.png" alt="Our Team at Work">
+    <img src="../assets/teamwork.png" alt="Our Team at Work">
     
     <div class="content-overlay">
         <h2>Why Choose Us?</h2>

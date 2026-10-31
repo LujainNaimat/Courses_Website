@@ -11,16 +11,17 @@ include"connect.php";
 $id=$_GET['id'];
 $sql="DELETE from orders where id=$id";
 $result=mysqli_query($connect,$sql);
-$check=$_GET['from'];
+$check = isset($_GET['from']) ? $_GET['from'] : '';
 if($check=='cart'){
   header("Location: cart.php");
-  
+}
+else if($check=='courses'){
+  header("Location: courses.php");
 }
 else{
-header("Location: mycourses.php");
-
+  header("Location: mycourses.php");
 }
-;
+exit();
 ?>
 </body>
 </html>
