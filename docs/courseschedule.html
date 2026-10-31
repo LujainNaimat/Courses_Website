@@ -64,7 +64,11 @@
                         break;
                     }
                 }
-                html += "<td>" + esc(coursename) + "</td>";
+                if (coursename != "") {
+                    html += "<td><span class='slot'>" + esc(coursename) + "</span></td>";
+                } else {
+                    html += "<td></td>";
+                }
             }
             html += "</tr>";
         }

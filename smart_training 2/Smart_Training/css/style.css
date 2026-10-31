@@ -888,3 +888,36 @@ border:1px solid white;
     }
 }
 
+/* course schedule: equal columns and course names as matching blocks */
+#schedule-container table {
+  table-layout: fixed;
+  min-width: 900px;
+}
+
+#schedule-container th,
+#schedule-container td {
+  padding: 10px 8px;
+  vertical-align: middle;
+}
+
+#schedule-container td:first-child {
+  width: 130px;
+  white-space: nowrap;
+}
+
+#schedule-container .slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 8px 6px;
+
+  background: #dbeafe;
+  color: #1e3a8a;
+  border-left: 4px solid #1e3a8a;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}

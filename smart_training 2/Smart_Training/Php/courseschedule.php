@@ -55,7 +55,11 @@ if($schedule['stime']==$time['stime']&&$schedule['etime']==$time['etime']&& $sch
 $coursename=$schedule['name'];
 break;}
 }
-echo "<td>".$coursename."</td>";
+if($coursename!=""){
+    echo "<td><span class='slot'>".$coursename."</span></td>";
+}else{
+    echo "<td></td>";
+}
 }  echo"</tr>"; }
  echo"</table>";
 ?>
